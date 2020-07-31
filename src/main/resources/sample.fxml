@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane alignment="top_left" hgap="10" prefHeight="400" prefWidth="600" vgap="10"
+          xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="sample.Controller">
+    <children>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ChoiceBox fx:id="id_rarity" prefWidth="150.0" />
+            <ChoiceBox fx:id="id_quality" prefWidth="150.0" />
+            <ChoiceBox fx:id="id_type" prefWidth="150.0" />
+            <Button fx:id="id_search" prefWidth="100.0" text="搜索"/>
+        </HBox>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+   <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+</GridPane>

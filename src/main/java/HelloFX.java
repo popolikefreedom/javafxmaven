@@ -3,16 +3,14 @@ import com.cmq.syk.ItemConst;
 import com.cmq.syk.ItemOption;
 import com.cmq.syk.ItemPrice;
 import com.cmq.syk.util.JsonStream;
+import com.cmq.syk.util.RuntimeUtil;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -38,10 +36,13 @@ public class HelloFX extends Application {
     private ChoiceBox<String> typeBpx;
 
     private ItemOption itemOption;
+    private RuntimeUtil runtimeUtil;
 
     @Override
     public void start(Stage stage) {
         itemOption = new ItemOption();
+        runtimeUtil = new RuntimeUtil();
+        System.out.println(System.getProperty("os.name"));
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -132,47 +133,17 @@ public class HelloFX extends Application {
                         if (empty == false) {
                             VBox vBox = new VBox();
                             Label name = new Label(item.itemName);
+                            vBox.getChildren().addAll(name);
 
                             ItemPrice steamPrice = item.priceMap.get(ItemConst.TAG_STEAM);
-                            Button steam = new Button("steam :" + steamPrice.price);
-                            steam.setOnAction(actionEvent -> {
-                                Runtime runtime = Runtime.getRuntime();
-                                try {
-                                    runtime.exec("open " + steamPrice.url);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            });
-                            vBox.getChildren().addAll(name, steam);
+                            setPriceView(vBox, steamPrice, "steam :");
 
 
                             ItemPrice c5Price = item.priceMap.get(ItemConst.TAG_C5);
-                            if (c5Price != null){
-                                Button c5 = new Button("c5 :" + c5Price.price + ", rate :" + c5Price.rate);
-                                c5.setOnAction(actionEvent -> {
-                                    Runtime runtime = Runtime.getRuntime();
-                                    try {
-                                        runtime.exec("open " + c5Price.url);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                                vBox.getChildren().add(c5);
-                            }
+                            setPriceView(vBox, c5Price, "c5 :");
 
                             ItemPrice buffPrice = item.priceMap.get(ItemConst.TAG_BUFF);
-                            if (buffPrice != null){
-                                Button buff = new Button("buff :" + buffPrice.price + ", rate :" + buffPrice.rate);
-                                buff.setOnAction(actionEvent -> {
-                                    Runtime runtime = Runtime.getRuntime();
-                                    try {
-                                        runtime.exec("open " + buffPrice.url);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                                vBox.getChildren().add(buff);
-                            }
+                            setPriceView(vBox, buffPrice, "buff :");
 
                             this.setGraphic(vBox);
 
@@ -183,6 +154,16 @@ public class HelloFX extends Application {
                 return listCell;
             }
         });
+    }
+
+    private void setPriceView(VBox vBox, ItemPrice price, String tag) {
+        if (price != null) {
+            Button buff = new Button(tag + price.price + ", rate :" + price.rate);
+            buff.setOnAction(actionEvent -> {
+                runtimeUtil.browse(price.url);
+            });
+            vBox.getChildren().add(buff);
+        }
     }
 
     private int sortIndex;

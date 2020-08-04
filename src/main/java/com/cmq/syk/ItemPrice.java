@@ -6,5 +6,6 @@ public class ItemPrice {
     public String tag;
     public float price;
     public float rate;
-    public int number;
+    public String number;
+    public String url;
 }

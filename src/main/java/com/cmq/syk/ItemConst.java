@@ -1,6 +1,12 @@
 package com.cmq.syk;
 
 public class ItemConst {
+
+    public static final String TAG_C5 = "c5game";
+    public static final String TAG_BUFF = "buff";
+    public static final String TAG_STEAM = "steam";
+
+
     public static final String RARITY_IMMORTAL ="immortal";
     public static final String RARITY_MYTHICAL = "mythical";
     public static final String RARITY_RARE = "rare";
@@ -67,4 +73,6 @@ public class ItemConst {
     public static final String CN_QUALITY_LUCKY = "吉祥";
     public static final String CN_QUALITY_INFUSED = "融合";
     public static final String CN_QUALITY_UNUSUAL = "独特";
+
+
 }

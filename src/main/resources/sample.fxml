@@ -14,6 +14,14 @@
             <ChoiceBox fx:id="id_type" prefWidth="150.0" />
             <Button fx:id="id_search" prefWidth="100.0" text="搜索"/>
         </HBox>
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="id_buff_rate" prefWidth="100.0" text="buff比例"/>
+            <Button fx:id="id_c5_rate" prefWidth="100.0" text="c5比例"/>
+        </HBox>
+
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ListView fx:id="id_list" prefWidth="600"></ListView>
+        </HBox>
     </children>
     <columnConstraints>
         <ColumnConstraints/>
